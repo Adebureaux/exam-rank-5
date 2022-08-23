@@ -1,6 +1,6 @@
 #ifndef ATARGET_HPP
 # define ATARGET_HPP
-# include "Warlock.hpp"
+# include "ASpell.hpp"
 class ASpell;
 
 class ATarget {

@@ -18,5 +18,6 @@ const std::string& ATarget::getType(void) const {
 }
 
 void ATarget::getHitBySpell(const ASpell& rhs) const {
-	std::cout << rhs.getEffects() << std::endl;
+	std::cout << type << " has been " << rhs.getEffects() << "!" << std::endl;
 }
+

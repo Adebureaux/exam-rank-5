@@ -1,6 +1,9 @@
 #ifndef ASpell_HPP
 # define ASpell_HPP
-# include "Warlock.hpp"
+# include <iostream>
+# include <string>
+# include "ATarget.hpp"
+class ATarget;
 
 class ASpell {
 	public:
@@ -13,6 +16,8 @@ class ASpell {
 		std::string getEffects(void) const;
 
 		virtual const ASpell* clone(void) const = 0;
+
+		void launch(const ATarget& rhs) const;
 
 	private:
 		std::string name;

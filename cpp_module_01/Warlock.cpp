@@ -1,6 +1,4 @@
 #include "Warlock.hpp"
-#include "ASpell.hpp"
-#include "ATarget.hpp"
 
 Warlock::Warlock(const std::string& name, const std::string& title) : name(name), title(title) {
 	std::cout << name << ": This looks like another boring day." << std::endl;
@@ -36,18 +34,40 @@ void Warlock::introduce(void) const {
 	std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
 }
 
+void Warlock::learnSpell(ASpell* spell) {
+	this->spell.push_back(spell);
+}
+
+void Warlock::forgetSpell(std::string spell) {
+	for (std::vector<ASpell*>::iterator it = this->spell.begin(); it < this->spell.end(); it++) {
+		if (spell == (*it)->getName()) {
+			this->spell.erase(it);
+			break;
+		}
+	}
+}
+
+void Warlock::launchSpell(std::string spell, ATarget& target) {
+	for (int i = 0; i < this->spell.size(); i++) {
+		if (spell == this->spell[i]->getName()) {
+			target.getHitBySpell(*this->spell[i]);
+			break;
+		}
+	}
+}
+
 int main()
 {
-	Warlock const richard("Richard", "Mistress of Magma");
-	richard.introduce();
-	std::cout << richard.getName() << " - " << richard.getTitle() << std::endl;
+  Warlock richard("Richard", "the Titled");
 
-	Warlock* jack = new Warlock("Jack", "the Long");
-	jack->introduce();
-	jack->setTitle("the Mighty");
-	jack->introduce();
+  Dummy bob;
+  Fwoosh* fwoosh = new Fwoosh();
 
-	delete jack;
+  richard.learnSpell(fwoosh);
 
-	return (0);
+  richard.introduce();
+  richard.launchSpell("Fwoosh", bob);
+
+  richard.forgetSpell("Fwoosh");
+  richard.launchSpell("Fwoosh", bob);
 }
