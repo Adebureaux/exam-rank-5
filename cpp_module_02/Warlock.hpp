@@ -6,7 +6,12 @@
 # include "ASpell.hpp"
 # include "ATarget.hpp"
 # include "Fwoosh.hpp"
+# include "Polymorph.hpp"
+# include "Fireball.hpp"
 # include "Dummy.hpp"
+# include "BrickWall.hpp"
+# include "SpellBook.hpp"
+# include "TargetGenerator.hpp"
 
 class Warlock {
 	public:
@@ -23,13 +28,13 @@ class Warlock {
 		void introduce(void) const;
 
 		void learnSpell(ASpell* spell);
-		void forgetSpell(std::string spell);
-		void launchSpell(std::string spell, ATarget& target);
+		void forgetSpell(const std::string& name);
+		void launchSpell(const std::string& name, ATarget& target);
 
 	private:
 		std::string name;
 		std::string title;
-		std::vector<ASpell*> spell;
+		SpellBook book;
 };
 
 #endif

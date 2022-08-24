@@ -2,7 +2,7 @@
 # define SPELLBOOK_HPP
 # include <iostream>
 # include <string>
-# include <vector>
+# include <map>
 # include "ASpell.hpp"
 
 class SpellBook {
@@ -19,7 +19,7 @@ class SpellBook {
 		SpellBook(const SpellBook& rhs);
 
 	private:
-		std::vector<ASpell*> spell;
+		std::map<std::string, ASpell*> spell;
 };
 
 #endif

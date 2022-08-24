@@ -1,9 +1,9 @@
 #include "BrickWall.hpp"
 
-BrickWall::BrickWall() : ATarget("Target Practice Dummy") {}
+BrickWall::BrickWall() : ATarget("Inconspicuous Red-brick Wall") {}
 
 BrickWall::~BrickWall() {}
 
-const BrickWall* BrickWall::clone(void) const {
-	return (this);
+BrickWall* BrickWall::clone(void) const {
+	return (new BrickWall());
 }

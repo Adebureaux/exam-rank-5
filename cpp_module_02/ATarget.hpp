@@ -12,7 +12,7 @@ class ATarget {
 
 		const std::string& getType(void) const;
 
-		virtual const ATarget* clone(void) const = 0;
+		virtual ATarget* clone(void) const = 0;
 
 		void getHitBySpell(const ASpell& rhs) const;
 

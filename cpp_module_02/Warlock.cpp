@@ -35,39 +35,43 @@ void Warlock::introduce(void) const {
 }
 
 void Warlock::learnSpell(ASpell* spell) {
-	this->spell.push_back(spell);
+	book.learnSpell(spell);
 }
 
-void Warlock::forgetSpell(std::string spell) {
-	for (std::vector<ASpell*>::iterator it = this->spell.begin(); it < this->spell.end(); it++) {
-		if (spell == (*it)->getName()) {
-			this->spell.erase(it);
-			break;
-		}
-	}
+void Warlock::forgetSpell(const std::string& name) {
+	book.forgetSpell(name);
 }
 
-void Warlock::launchSpell(std::string spell, ATarget& target) {
-	for (int i = 0; i < this->spell.size(); i++) {
-		if (spell == this->spell[i]->getName()) {
-			target.getHitBySpell(*this->spell[i]);
-			break;
-		}
-	}
+void Warlock::launchSpell(const std::string& name, ATarget& target) {
+	ASpell* spell;
+
+	spell = book.createSpell(name);
+	if (spell)
+		spell->launch(target);
 }
 
-int main()
+int main(void)
 {
-  Warlock richard("Richard", "the Titled");
+	Warlock richard("Richard", "foo");
+	richard.setTitle("Hello, I'm Richard the Warlock!");
+	BrickWall model1;
 
-  Dummy bob;
-  Fwoosh* fwoosh = new Fwoosh();
+	Polymorph* polymorph = new Polymorph();
+	TargetGenerator tarGen;
 
-  richard.learnSpell(fwoosh);
+	tarGen.learnTargetType(&model1);
+	richard.learnSpell(polymorph);
 
-  richard.introduce();
-  richard.launchSpell("Fwoosh", bob);
+	Fireball* fireball = new Fireball();
 
-  richard.forgetSpell("Fwoosh");
-  richard.launchSpell("Fwoosh", bob);
+	richard.learnSpell(fireball);
+
+	ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+
+	richard.introduce();
+	richard.launchSpell("Polymorph", *wall);
+	richard.launchSpell("Fireball", *wall);
+	delete polymorph;
+	delete fireball;
+	return (0);
 }
